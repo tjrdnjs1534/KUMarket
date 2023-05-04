@@ -22,4 +22,9 @@ public class PostPhotoEntity {
     @ManyToOne
     @JoinColumn(name = "post_id")
     private PostEntity post;
+
+    public void setPost(PostEntity postEntity) {
+        this.post = postEntity;
+    }
 }
+

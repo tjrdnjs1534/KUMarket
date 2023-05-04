@@ -1,12 +1,20 @@
 package com.kumarket.kumarket.posts.entities;
 
+import com.kumarket.kumarket.common.BaseTimeEntity;
 import com.kumarket.kumarket.posts.Category;
+import com.kumarket.kumarket.posts.dto.PostDto;
+import com.kumarket.kumarket.posts.dto.PostPhotoDto;
 import com.kumarket.kumarket.users.entities.UserEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "post")
@@ -14,7 +22,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostEntity {
+@DynamicInsert
+public class PostEntity extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,9 +37,11 @@ public class PostEntity {
     private Long price;
 
     @Column(name = "thumbnail_url")
+    //@ColumnDefault("no.png") // 없을 때 url 없이
     private String thumbnailUrl;
 
     @Column(name = "view_count")
+    @ColumnDefault("0")
     private Long viewCount;
 
     @ManyToOne
@@ -38,4 +49,35 @@ public class PostEntity {
     private UserEntity user;
 
     // state
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<PostPhotoEntity> photos = new ArrayList<>();
+
+    public void addPhoto(PostPhotoEntity photo){
+        photos.add(photo);
+        photo.setPost(this);
+    }
+
+    public void removePhoto(PostPhotoEntity photo){
+        photos.remove(photo);
+        photo.setPost(null);
+    }
+    public void removeAllPhotos(){
+        for(PostPhotoEntity photo : photos){
+            this.removePhoto(photo);
+        }
+    }
+
+    /*
+    public void updatePost(String title, String description, Long price){
+        this.title = title;
+        this.description = description;
+        this.price = price;
+    }
+    public void updatePostPhoto(List<String> urls){
+        for(String url : urls){
+            this.addPhoto(PostPhotoEntity.builder().url(url).build());
+        }
+    }*/
+
+
 }
