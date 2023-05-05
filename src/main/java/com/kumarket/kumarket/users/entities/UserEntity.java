@@ -1,6 +1,8 @@
 package com.kumarket.kumarket.users.entities;
 
 import com.kumarket.kumarket.bookmarks.entities.BookmarkEntity;
+import com.kumarket.kumarket.common.BaseTimeEntity;
+import com.kumarket.kumarket.posts.entities.PostEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +18,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEntity {
+public class UserEntity extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,7 +30,13 @@ public class UserEntity {
 
     private Integer likes;
 
-
     @OneToMany(mappedBy = "user")
     private List<BookmarkEntity> bookmarks = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<PostEntity> posts = new ArrayList<>();
+    public void uploadPost(PostEntity postEntity){
+        posts.add(postEntity);
+        postEntity.setUser(this);
+    }
 }

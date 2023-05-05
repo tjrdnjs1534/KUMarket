@@ -45,12 +45,17 @@ public class PostEntity extends BaseTimeEntity {
     private Long viewCount;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id" , updatable = false)
     private UserEntity user;
 
     // state
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<PostPhotoEntity> photos = new ArrayList<>();
+
+
+    public void setUser(UserEntity userEntity){
+        this.user = userEntity;
+    }
 
     public void addPhoto(PostPhotoEntity photo){
         photos.add(photo);
