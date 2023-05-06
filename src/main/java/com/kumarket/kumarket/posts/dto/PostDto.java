@@ -48,15 +48,15 @@ public class PostDto {
 //                .photos(postPhotoDto)
 //                .build();
 //    } method로 한거
-    public PostEntity toEntity(PostDto postDto){ // id 유지 x
+    public PostEntity toEntity(){ // id 유지 x
         PostEntity postEntity = PostEntity.builder()
-                .title(postDto.getTitle())
-                .description(postDto.getDescription())
-                .thumbnailUrl(postDto.getThumbnailUrl())
-                .price(postDto.getPrice())
+                .title(title)
+                .description(description)
+                .thumbnailUrl(thumbnailUrl)
+                .price(price)
                 .photos(new ArrayList<>())
                 .build();
-        for(String url : postDto.getPhotos().getUrls()){
+        for(String url : photos.getUrls()){
             postEntity.addPhoto(PostPhotoEntity.builder().url(url).build());
         }
         return postEntity;

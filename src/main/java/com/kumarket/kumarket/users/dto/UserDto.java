@@ -14,11 +14,11 @@ public class UserDto {
     private String username;
     private String password;
     private String phoneNumber;
-    public UserEntity toEntity(UserDto userDto){
+    public UserEntity toEntity(){
         UserEntity userEntity = UserEntity.builder()
-                .username(userDto.getUsername())
-                .password(userDto.getPassword())
-                .phoneNumber(userDto.getPhoneNumber())
+                .username(username)
+                .password(password)
+                .phoneNumber(phoneNumber)
                 .bookmarks(new ArrayList<>())
                 .likes(0)
                 .posts(new ArrayList<>())

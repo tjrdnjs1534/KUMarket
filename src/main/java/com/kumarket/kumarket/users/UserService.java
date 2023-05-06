@@ -9,7 +9,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public void createUser(UserDto userDto){
-        userRepository.save(userDto.toEntity(userDto));
+        userRepository.save(userDto.toEntity());
     }
 
 
