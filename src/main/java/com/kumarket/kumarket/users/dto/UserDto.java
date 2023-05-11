@@ -1,6 +1,7 @@
 package com.kumarket.kumarket.users.dto;
 
 
+import com.kumarket.kumarket.bookmarks.entities.BookmarkEntity;
 import com.kumarket.kumarket.users.entities.UserEntity;
 import lombok.*;
 
@@ -19,7 +20,6 @@ public class UserDto {
                 .username(username)
                 .password(password)
                 .phoneNumber(phoneNumber)
-                .bookmarks(new ArrayList<>())
                 .likes(0)
                 .posts(new ArrayList<>())
                 .build();

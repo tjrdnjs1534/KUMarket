@@ -53,6 +53,7 @@ public class PostService {
                 .thumbnailUrl(postDto.getThumbnailUrl())
                 .photos(new ArrayList<>())
                 .viewCount(postEntity.getViewCount())
+                .bookmarks(postEntity.getBookmarks())
                 .build();
         for(String url : postDto.getPhotos().getUrls()){
             updatePostEntity.addPhoto(PostPhotoEntity.builder().url(url).build());
