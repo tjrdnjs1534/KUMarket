@@ -25,7 +25,6 @@ public class BookmarkService {
         //UserEntity userEntity = userRepository.findById(userId).orElseThrow();
         //Optional<BookmarkEntity> bookmarkEntity = bookmarkRepository.findByUserId(userId);
         PostEntity postEntity = postRepository.findById(postId).orElseThrow();
-
     }
     public List<BookmarkPostEntity> getUserAllBookmarks(Long userId) {
         // userid로 bookmark id 찾고 bookmark id의 모든 bookmark post 불러오기
