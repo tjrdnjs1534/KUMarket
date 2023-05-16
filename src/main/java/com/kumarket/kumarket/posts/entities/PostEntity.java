@@ -1,9 +1,8 @@
 package com.kumarket.kumarket.posts.entities;
 
+import com.kumarket.kumarket.bookmarks.entities.BookmarkEntity;
 import com.kumarket.kumarket.common.BaseTimeEntity;
 import com.kumarket.kumarket.posts.Category;
-import com.kumarket.kumarket.posts.dto.PostDto;
-import com.kumarket.kumarket.posts.dto.PostPhotoDto;
 import com.kumarket.kumarket.users.entities.UserEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -45,12 +44,18 @@ public class PostEntity extends BaseTimeEntity {
     private Long viewCount;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id" , updatable = false)
     private UserEntity user;
 
-    // state
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<BookmarkEntity> bookmarks = new ArrayList<>();
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<PostPhotoEntity> photos = new ArrayList<>();
+
+
+    public void setUser(UserEntity userEntity){
+        this.user = userEntity;
+    }
 
     public void addPhoto(PostPhotoEntity photo){
         photos.add(photo);

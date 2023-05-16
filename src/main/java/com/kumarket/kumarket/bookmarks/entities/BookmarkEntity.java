@@ -27,4 +27,10 @@ public class BookmarkEntity {
     @JoinColumn(name = "post_id")
     private PostEntity post;
 
+    public void setUser(UserEntity userEntity) {
+        this.user = userEntity;
+    }
+    public void setPost(PostEntity postEntity){
+        this.post = postEntity;
+    }
 }
