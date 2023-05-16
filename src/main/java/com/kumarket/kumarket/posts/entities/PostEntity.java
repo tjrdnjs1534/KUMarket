@@ -1,6 +1,6 @@
 package com.kumarket.kumarket.posts.entities;
 
-import com.kumarket.kumarket.bookmarks.entities.BookmarkPostEntity;
+import com.kumarket.kumarket.bookmarks.entities.BookmarkEntity;
 import com.kumarket.kumarket.common.BaseTimeEntity;
 import com.kumarket.kumarket.posts.Category;
 import com.kumarket.kumarket.users.entities.UserEntity;
@@ -48,7 +48,7 @@ public class PostEntity extends BaseTimeEntity {
     private UserEntity user;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<BookmarkPostEntity> bookmarks = new ArrayList<>(); //이게 맞나? bookmark는 정말 많을텐데 이렇게 관리?
+    private List<BookmarkEntity> bookmarks = new ArrayList<>();
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<PostPhotoEntity> photos = new ArrayList<>();
 
@@ -71,14 +71,7 @@ public class PostEntity extends BaseTimeEntity {
             this.removePhoto(photo);
         }
     }
-    public void addBookmark(BookmarkPostEntity bookmarkPostEntity){
-        bookmarks.add(bookmarkPostEntity);
-        bookmarkPostEntity.setPost(this);
-    }
-    public void removeBookmark(BookmarkPostEntity bookmarkPostEntity){
-        bookmarks.remove(bookmarkPostEntity);
-        bookmarkPostEntity.setPost(null);
-    }
+
     /*
     public void updatePost(String title, String description, Long price){
         this.title = title;

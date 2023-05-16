@@ -1,8 +1,6 @@
 package com.kumarket.kumarket.bookmarks;
 
 import com.kumarket.kumarket.bookmarks.entities.BookmarkEntity;
-import com.kumarket.kumarket.bookmarks.entities.BookmarkPostEntity;
-import com.kumarket.kumarket.users.entities.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +21,7 @@ public class BookmarkController {
 
     @GetMapping
     @RequestMapping("/users/bookmarks")
-    public List<BookmarkPostEntity> getUserAllBookmarks(){
+    public List<BookmarkEntity> getUserAllBookmarks(){
         Long userId = 1L;
         return bookmarkService.getUserAllBookmarks(userId);
     }

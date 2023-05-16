@@ -1,7 +1,6 @@
 package com.kumarket.kumarket.users.dto;
 
 
-import com.kumarket.kumarket.bookmarks.entities.BookmarkEntity;
 import com.kumarket.kumarket.users.entities.UserEntity;
 import lombok.*;
 
